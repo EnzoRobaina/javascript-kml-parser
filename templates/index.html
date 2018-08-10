@@ -7,22 +7,69 @@
     <meta name="description" content="">
     <meta name="author" content="Enzo">
     <title>KML parser</title>
-    <script src="../js/KmlMapParser.js"></script>
     <script src="../js/index.js"></script>
-    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGKMFSydIF47MXdUX8B_hLA4SW_dmb2t0&callback=initMap"></script> -->
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB53bhx3k6Y5A2_n3eZSTIrCpuSPPqxqGY"
-    async defer></script> -->
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
     <script src="../node_modules/jquery/dist/jquery.js"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script>if (window.module) module = window.module;</script>
     <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     
 
 
 </head>
   <body>
+    <div id ="bounds" class = "container-wd-100">
+      <hr class = "line">
+      <h2>KML Parser!</h2>
+      <hr class  = "line">
 
-    <h1>KML</h1>
+      <div id = "kml-source">
+      <h5>KML source is...</h5>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button id = "link-btn" type="button" class="btn btn-secondary">Link</button>
+            <button id = "file-btn" type="button" class="btn btn-secondary">File</button>
+            <button id = "text-btn" type="button" class="btn btn-secondary">Text</button>
+        </div>
+      </div>
+      
+      <div id = "text" class = "hidden">
+        <textarea class="shadow form-control" id="kml-textarea" rows="30" style="width:40%" placeholder="Paste your KML here!"></textarea>
+        <div class = "cbuttons">
+          <button id = "text-parse" type="button" class="btn btn-secondary">Parse!</button>
+          <button type="button" class="btn btn-outline-secondary">I need an array of coordinates</button>
+        </div>
+      </div>
+
+      <div id = "link" class = "hidden">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <input type = "text" class = "shadow form-control" id = "link-text" placeholder="Paste your link here!">
+            </div>
+        </div>
+        <div class = "cbuttons">
+            <button id = "link-parse" type="button" class="btn btn-secondary">Parse!</button>
+            <button type="button" class="btn btn-outline-secondary">I need an array of coordinates</button>
+        </div>  
+      </div>
+
+      <div id = "file" class = "hidden">
+          <input id="kml-file" type="file" class="form-control-file" accept=".kml"> 
+          <div class = "cbuttons">
+              <button id = "file-parse" type="button" class="btn btn-secondary">Parse!</button>
+              <button type="button" class="btn btn-outline-secondary">I need an array of coordinates</button>
+          </div>
+      </div>
+
+      <div id = "output" class = "hidden">
+          <button style = "margin-bottom:2%;" id = "copy" type = "button" class = "btn btn-light"><i style="margin-right:3%"class="far fa-clipboard"></i><span class = "ctext">Copy to clipboard</span></button>
+          <textarea class="shadow form-control" id="kml-output" style="width:40%" rows="30" readonly></textarea>
+      </div>
+      
+    </div>
+    <div style = "margin-top:10%;margin-bottom:3%;">
+        <a id = "read-more" class = "read-more">About</a>
+    </div>
   </body>
 </html>

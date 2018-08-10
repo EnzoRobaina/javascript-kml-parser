@@ -1,66 +1,102 @@
-// const tgj = require('togeojson')
-// const electron = require('electron')
 const $ = require('jquery')
-// DOMParser = require('xmldom').DOMParser;
+const tj = require('togeojson')
+const shell = require('electron').shell
+const parser = new DOMParser();
 
-// $.ajax('https://raw.githubusercontent.com/EnzoRobaina/Javascript-busu/master/ciclovias.kml').done(function(xml) {
-  
-// var kml = new DOMParser().parseFromString(xml)
-// console.log(kml)
-// var asdf = tgj.kml(kml)
-// //console.log(tgj.kml(xml));
-// });
-// $.getScript("../js/togeojson.js", function() {
-//     alert("sucess")
-// })
 
-// var tj = require('togeojson'),
-//     fs = require('fs'),
-//     // node doesn't have xml parsing or a dom. use xmldom
-//     DOMParser = require('xmldom').DOMParser;
-var tj = require('togeojson'),
-    fs = require('fs'),
-    // node doesn't have xml parsing or a dom. use xmldom
-    DOMParser = require('xmldom').DOMParser;
-var path = require('path');
-var relpath = path.join(__dirname, '../a.kml')
-//     console.log(relpath)
+$(document).ready(function(){
+    $("#link-btn").click(function() {
+        $("#bounds > div").not(":first").hide()
+        $("#link").fadeToggle("fast")
+        clr()
+    })
+
+    $("#text-btn").click(function() {
+        $("#bounds > div").not(":first").hide()
+        $("#text").fadeToggle("fast")
+        clr()
+
+    })
+
+    $("#file-btn").click(function() {
+        $("#bounds > div").not(":first").hide()
+        $("#file").fadeToggle("fast")
+        clr()
+
+    })
     
-var kmlfile = fs.readFileSync(relpath, 'utf-8')
-//     console.log(kmlfile)
+    $("#copy").click(function() {
+        let text = document.getElementById("kml-output")
+        text.select()
+        document.execCommand("copy")
+    })
 
-//     var Akml = new DOMParser().parseFromString(kmlfile)
+    $("#text-parse").click(function() {
+        let text = $("#kml-textarea").val()
+        let parsedText = parser.parseFromString(text,"text/xml")
+        let converted = tj.kml(parsedText)
+        $("#text").fadeToggle("fast")
+        
+        $("#kml-output").val(JSON.stringify(converted))
+        console.log(converted)
+        $("#output").fadeToggle("fast")
 
+    })
 
+    $("#link-parse").click(function() {
+        getKML($("#link-text").val(), function(data){
+            let text = parser.parseFromString(data,"text/xml");
+            let converted = tj.kml(text);
+            $("#link").fadeToggle("fast")
+            $("#kml-output").val(JSON.stringify(converted))
+            console.log(converted)
+            $("#output").fadeToggle("fast")
+        },
+        function(){
+            //FAIL
+            alert("Something went wrong!")
+        })
 
-//     console.log(Akml)
-//     var converted = tj.gpx(Akml,{ styles: true })
+    })
 
-//     console.log(JSON.stringify(converted))
+    $("#file-parse").click(function() {
+        kmlFile = $('#kml-file').prop('files')[0];
+        if (kmlFile) {
+            let reader = new FileReader();
+            reader.readAsText(kmlFile);
+            reader.onload = function(e) {
+                let parsedText = parser.parseFromString(e.target.result,"text/xml")
+                let converted = tj.kml(parsedText)
 
+                $("#file").fadeToggle("fast")
+                $("#kml-output").val(JSON.stringify(converted))
+                console.log(converted)
+                $("#output").fadeToggle("fast")
+                
+            };
+        }
+        else{
+            alert("No file was supplied")
+        }
+    })
 
- 
-// var kml = new DOMParser().parseFromString(fs.readFileSync(relpath, 'utf8'));
- 
-// var converted = tj.gpx(kml);
- 
-// var convertedWithStyles = tj.gpx(kml, { styles: true });
-// console.log(converted)
-$.ajax({
-    type: "GET",
-    url: 'https://raw.githubusercontent.com/EnzoRobaina/Javascript-busu/master/ciclovias.kml',
-    async: false,})
+    $("#read-more").click(function() { 
+        let source = "https://github.com/EnzoRobaina/Javascript-KML-Parser"
+        shell.openExternal(source);
+    })
     
-    .done(function(xml) {
-    console.log(xml)
-    // console.log(stringed)
-    // var ccc = tj.kml((new DOMParser()).parseFromString(stringed, 'text/xml'))
-}) 
-// var kml = new DOMParser().parseFromString(xml)
-// console.log(kml)
-// var asdf = tgj.kml(kml)
-// //console.log(tgj.kml(xml));
-// });
+    function clr(){
+        $("#kml-textarea, #link-text, #kml-file, #kml-output").val('')
+    }
 
-// var converted = JSON.stringify( tj.kml((new DOMParser()).parseFromString(kmlfile, 'text/xml') ), null, 4);
-// console.log(converted)
+    function getKML(url, dnCb, failCb){
+        $.ajax({
+            url: url,
+            method: 'GET',
+        }).done(function(data){
+            dnCb(data)
+        }).fail(failCb)
+    }
+
+
+});
