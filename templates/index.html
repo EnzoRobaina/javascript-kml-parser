@@ -14,6 +14,7 @@
     <script>if (window.module) module = window.module;</script>
     <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/spin.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     
 
@@ -23,8 +24,7 @@
     <div id ="bounds" class = "container-wd-100">
       <hr class = "line">
       <h2>KML Parser!</h2>
-      <hr class  = "line">
-
+      <span class = "author"><span>BY ENZOROBAINA</span></span>
       <div id = "kml-source">
       <h5>KML source is...</h5>
         <div class="btn-group" role="group" aria-label="Basic example">
@@ -38,7 +38,13 @@
         <textarea class="shadow form-control" id="kml-textarea" rows="30" style="width:40%" placeholder="Paste your KML here!"></textarea>
         <div class = "cbuttons">
           <button id = "text-parse" type="button" class="btn btn-secondary">Parse!</button>
-          <button type="button" class="btn btn-outline-secondary">I need an array of coordinates</button>
+          <button id = "text-parse-array" type="button" class="btn btn-outline-secondary">I need an array of coordinates</button>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="styles-text">
+            <label class="form-check-label" for="styles-text">
+              Keep styles
+            </label>
+          </div>
         </div>
       </div>
 
@@ -50,7 +56,13 @@
         </div>
         <div class = "cbuttons">
             <button id = "link-parse" type="button" class="btn btn-secondary">Parse!</button>
-            <button type="button" class="btn btn-outline-secondary">I need an array of coordinates</button>
+            <button id = "link-parse-array" type="button" class="btn btn-outline-secondary">I need an array of coordinates</button>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="styles-link">
+                <label class="form-check-label" for="styles-link">
+                  Keep styles
+                </label>
+            </div>
         </div>  
       </div>
 
@@ -58,7 +70,13 @@
           <input id="kml-file" type="file" class="form-control-file" accept=".kml"> 
           <div class = "cbuttons">
               <button id = "file-parse" type="button" class="btn btn-secondary">Parse!</button>
-              <button type="button" class="btn btn-outline-secondary">I need an array of coordinates</button>
+              <button id = "file-parse-array" type="button" class="btn btn-outline-secondary">I need an array of coordinates</button>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="styles-file">
+                <label class="form-check-label" for="styles-file">
+                  Keep styles
+                </label>
+              </div>
           </div>
       </div>
 
@@ -71,5 +89,6 @@
     <div style = "margin-top:10%;margin-bottom:3%;">
         <a id = "read-more" class = "read-more">About</a>
     </div>
+    <script type="text/javascript" src="../js/spin.js"></script>
   </body>
 </html>
