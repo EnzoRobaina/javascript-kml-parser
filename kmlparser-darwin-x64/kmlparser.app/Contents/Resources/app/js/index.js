@@ -95,8 +95,8 @@ $(document).ready(function(){
             let parsedText = parser.parseFromString(text,"text/xml")
             //converts the xml to geoJSON
             let converted = tj.kml(parsedText, { styles: style })
-            //removes every entry of " in the stringified object
-            converted = JSON.stringify(converted).replace(/"/g, "")
+            //stringifies the geoJSON
+            converted = JSON.stringify(converted)
             //hides the text input
             $("#text").fadeToggle("fast")
             //sets the output text to the geoJSON
@@ -132,7 +132,6 @@ $(document).ready(function(){
             let parsedText = parser.parseFromString(text,"text/xml")
             //converts the xml to geoJSON
             let converted = tj.kml(parsedText, { styles: style })
-            
             //hides the text input
             $("#text").fadeToggle("fast")
             //sets the output text to the geoJSON
@@ -169,8 +168,8 @@ $(document).ready(function(){
                     //SUCCESS 
                     let text = parser.parseFromString(data,"text/xml")
                     let converted = tj.kml(text, { styles: style })
-                    //removes every entry of " in the stringified object
-                    converted = JSON.stringify(converted).replace(/"/g, "")
+                    //stringifies the geoJSON
+                    converted = JSON.stringify(converted)
                     $("#link").fadeToggle("fast")
                     $("#kml-output").val(converted)
                     spinner.stop()
@@ -293,8 +292,8 @@ $(document).ready(function(){
                 let parsedText = parser.parseFromString(e.target.result,"text/xml")
                 //parses the xml to geoJSON
                 let converted = tj.kml(parsedText, { styles: style })
-                //removes every entry of " in the stringified object
-                converted = JSON.stringify(converted).replace(/"/g, "")
+                //stringifies the geoJSON
+                converted = JSON.stringify(converted)
                 $("#file").fadeToggle("fast")
                 $("#kml-output").val(converted)
                 spinner.stop()
@@ -357,6 +356,16 @@ $(document).ready(function(){
         }
         //removes every entry of " in the stringified object
         coords = coords.replace(/"/g, "")
+
+        //some necessary trims and manipulations on the string
+        coords = coords.replace(/{name:/g, "")
+
+        coords = coords.replace(/]}/g, "]")
+
+        coords = coords.replace(/},/g, "},\n")
+        
+        coords = coords.replace(/,coordinates:/g, " = \n")
+        
         return coords
     }
 });
