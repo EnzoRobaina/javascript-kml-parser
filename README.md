@@ -2,7 +2,9 @@
 A simple desktop/web app to parse KML to geoJSON and/or extract the coordinates in object format: {lat: , lng: }
 
 ## To Use
+Web version: http://kml-parser.ga/
 
+Desktop version:
 Either clone and run the executable files from root folder or deploy with npm from your command line:
 
 ```bash
