@@ -1,25 +1,42 @@
 <!DOCTYPE html>
+<!--
+
+       _..oo8"""Y8b.._
+     .88888888o.    "Yb.
+   .d888P""Y8888b      "b.
+  o88888    88888)       "b
+ d888888b..d8888P         'b
+ 88888888888888"           8
+(88DWB8888888P             8)
+ 8888888888P               8
+ Y88888888P     ee        .P
+  Y888888(     8888      oP
+   "Y88888b     ""     oP"
+     "Y8888o._     _.oP"
+       `""Y888boodP""'
+
+-->
 <html>
   <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Enzo">
     <title>KML parser</title>
-    <script src="../js/index.js"></script>
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-    <script src="../node_modules/jquery/dist/jquery.js"></script>
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/spinneropts.js"></script>
+    <script src="../js/togeojson.js"></script>
+    <script src="../js/index.js"></script>
     <script>if (window.module) module = window.module;</script>
-    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
     <link href="../css/spin.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-    
-
-
-</head>
+    <script src="../js/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="../css/sweetalert2.min.css">
+  </head>
   <body>
     <div id ="bounds" class = "container-wd-100">
       <hr class = "line">
@@ -70,7 +87,7 @@
           <input id="kml-file" type="file" class="form-control-file" accept=".kml"> 
           <div class = "cbuttons">
               <button id = "file-parse" type="button" class="btn btn-secondary">Parse!</button>
-              <button id = "file-parse-array" type="button" class="btn btn-outline-secondary">I need an array of coordinates</button>
+              <button id = "file-parse-array" type="button" class="btn btn-light">I need an array of coordinates</button>
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="styles-file">
                 <label class="form-check-label" for="styles-file">
@@ -81,13 +98,13 @@
       </div>
 
       <div id = "output" class = "hidden">
-          <button style = "margin-bottom:2%;" id = "copy" type = "button" class = "btn btn-light"><i style="margin-right:3%"class="far fa-clipboard"></i><span class = "ctext">Copy to clipboard</span></button>
+          <button style = "margin-bottom:2%;" id = "copy" type = "button" class = "btn btn-light"><i style="margin-right:3%" class="far fa-clipboard"></i><span class = "ctext">Copy to clipboard</span></button>
           <textarea class="shadow form-control" id="kml-output" style="width:40%" rows="30" readonly></textarea>
       </div>
       
     </div>
     <div style = "margin-top:10%;margin-bottom:3%;">
-        <a id = "read-more" class = "read-more">About</a>
+      <a id = "read-more" class = "read-more" href="https://github.com/EnzoRobaina/Javascript-KML-Parser" target="_blank">About</a>
     </div>
     <script type="text/javascript" src="../js/spin.js"></script>
   </body>

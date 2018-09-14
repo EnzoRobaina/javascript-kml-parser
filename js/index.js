@@ -1,13 +1,11 @@
-const $ = require('jquery')
-const tj = require('togeojson')
-const shell = require('electron').shell
-const swal = require('sweetalert2')
 const parser = new DOMParser();
 
 var coordArr = []
 var arr = []
 var coords = ''
 $(document).ready(function(){
+
+    //swal2 custom alerts
     function errMsg(text){
         swal({
             type: 'error',
@@ -21,33 +19,25 @@ $(document).ready(function(){
             confirmButtonClass: 'btn btn-success',
             cancelButtonClass: 'btn btn-danger',
             buttonsStyling: false,
-            })
+        })
     }
-    //spinner configs
-    var opts = {
-        lines: 20, // The number of lines to draw
-        length: 38, // The length of each line
-        width: 17, // The line thickness
-        radius: 46, // The radius of the inner circle
-        scale: 0.5, // Scales overall size of the spinner
-        corners: 1, // Corner roundness (0..1)
-        color: 'white', // CSS color or array of colors
-        fadeColor: 'transparent', // CSS color or array of colors
-        speed: 2.2, // Rounds per second
-        rotate: 0, // The rotation offset
-        animation: 'spinner-line-fade-quick', // The CSS animation name for the lines
-        direction: 1, // 1: clockwise, -1: counterclockwise
-        zIndex: 2e9, // The z-index (defaults to 2000000000)
-        className: 'spinner', // The CSS class to assign to the spinner
-        top: '50%', // Top position relative to parent
-        left: '50%', // Left position relative to parent
-        shadow: '0 0 1px transparent', // Box-shadow for the lines
-        position: 'absolute' // Element positioning
-    };
 
+    function scMsg(text){
+        swal({
+            toast: true,
+            type: 'success',
+            title: "<span style = 'color:white;'>"+text+"</span",
+            showConfirmButton: false,
+            timer: 800,
+            background: 'black',
+            target:	'body',
+            position: 'top-end',//'center'
+        })
+    }
+    
     //initializes the spinning animation
     var target = document.getElementById('bounds');
-    var spinner = new Spinner(opts);
+    var spinner = new Spinner(getOpts());
     
     //fades in the inputs for each option
     $("#link-btn").click(function() {
@@ -75,6 +65,7 @@ $(document).ready(function(){
         let text = document.getElementById("kml-output")
         text.select()
         document.execCommand("copy")
+        scMsg("Copied to clipboard!")
     })
 
     //action of the parse button for the text input
@@ -94,7 +85,7 @@ $(document).ready(function(){
             //parses the text to xml
             let parsedText = parser.parseFromString(text,"text/xml")
             //converts the xml to geoJSON
-            let converted = tj.kml(parsedText, { styles: style })
+            let converted = toGeoJSON.kml(parsedText, { styles: style })
             //stringifies the geoJSON
             converted = JSON.stringify(converted)
             //hides the text input
@@ -131,7 +122,7 @@ $(document).ready(function(){
             //parses the text to xml
             let parsedText = parser.parseFromString(text,"text/xml")
             //converts the xml to geoJSON
-            let converted = tj.kml(parsedText, { styles: style })
+            let converted = toGeoJSON.kml(parsedText, { styles: style })
             //hides the text input
             $("#text").fadeToggle("fast")
             //sets the output text to the geoJSON
@@ -167,7 +158,7 @@ $(document).ready(function(){
                 function(data){
                     //SUCCESS 
                     let text = parser.parseFromString(data,"text/xml")
-                    let converted = tj.kml(text, { styles: style })
+                    let converted = toGeoJSON.kml(text, { styles: style })
                     //stringifies the geoJSON
                     converted = JSON.stringify(converted)
                     $("#link").fadeToggle("fast")
@@ -206,7 +197,7 @@ $(document).ready(function(){
                 function(data){
                     //SUCCESS 
                     let text = parser.parseFromString(data,"text/xml");
-                    let converted = tj.kml(text, { styles: style });
+                    let converted = toGeoJSON.kml(text, { styles: style });
                     $("#link").fadeToggle("fast")
                     $("#kml-output").val(getArr(converted))
                     spinner.stop()
@@ -248,7 +239,7 @@ $(document).ready(function(){
                 //parses the text to xml
                 let parsedText = parser.parseFromString(e.target.result,"text/xml")
                 //parses the xml to geoJSON
-                let converted = tj.kml(parsedText, { styles: style })
+                let converted = toGeoJSON.kml(parsedText, { styles: style })
 
                 $("#file").fadeToggle("fast")
                 $("#kml-output").val(getArr(converted))
@@ -291,7 +282,7 @@ $(document).ready(function(){
                 //parses the text to xml
                 let parsedText = parser.parseFromString(e.target.result,"text/xml")
                 //parses the xml to geoJSON
-                let converted = tj.kml(parsedText, { styles: style })
+                let converted = toGeoJSON.kml(parsedText, { styles: style })
                 //stringifies the geoJSON
                 converted = JSON.stringify(converted)
                 $("#file").fadeToggle("fast")
@@ -309,11 +300,6 @@ $(document).ready(function(){
             spinner.stop()
             errMsg("No file was supplied")
         }
-    })
-    //action of the 'about' button on the bottom of the page
-    $("#read-more").click(function() { 
-        let source = "https://github.com/EnzoRobaina/Javascript-KML-Parser"
-        shell.openExternal(source);
     })
     
     //function used to clear the inputs and checkboxes

@@ -40,7 +40,7 @@ h2 {font-family: 'Open Sans Condensed', sans-serif; font-size: 48px; font-weight
 p {font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 28px; margin: 0 0 48px; }
 
 
-a { color: #990000; text-decoration: none; }
+a {color:white; text-decoration: none; }
 
 
 a:hover { text-decoration: underline }
@@ -69,4 +69,4 @@ a:hover { text-decoration: underline }
 .read-more {-moz-border-radius: 50%; -moz-transition: all 0.2s ease-in-out; -webkit-border-radius: 50%; -webkit-transition: all 0.2s ease-in-out; background: #111; border-radius: 50%; display: block; font-family: 'Open Sans', sans-serif; font-size: 14px; height: 80px; line-height: 80px; margin: -40px 0 0 -40px; position: relative; bottom: 0px; left: 50%; text-align: center; text-transform: uppercase; width: 80px; }
 
 
-.read-more:hover { background: #990000; text-decoration: none; }
+.read-more:hover {text-decoration: none; }
