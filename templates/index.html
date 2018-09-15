@@ -20,8 +20,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Enzo">
+    <meta name="description" content="Web app to parse kml files to GeoJSON and/or extract coordinates in object format: {lat:, lng:}">
+    <meta name="author" content="Enzo Robaina">
     <title>KML parser</title>
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
     <script src="../js/jquery-3.3.1.min.js"></script>
@@ -54,8 +54,8 @@
       <div id = "text" class = "hidden">
         <textarea class="shadow form-control" id="kml-textarea" rows="30" style="width:40%" placeholder="Paste your KML here!"></textarea>
         <div class = "cbuttons">
-          <button id = "text-parse" type="button" class="btn btn-secondary">Parse!</button>
-          <button id = "text-parse-array" type="button" class="btn btn-outline-secondary">I need an array of coordinates</button>
+          <button id = "text-parse" type="button" class="btn btn-secondary">Parse to GeoJSON</button>
+          <button id = "text-parse-array" type="button" class="btn btn-light">Extract coordinates</button>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="styles-text">
             <label class="form-check-label" for="styles-text">
@@ -72,8 +72,8 @@
             </div>
         </div>
         <div class = "cbuttons">
-            <button id = "link-parse" type="button" class="btn btn-secondary">Parse!</button>
-            <button id = "link-parse-array" type="button" class="btn btn-outline-secondary">I need an array of coordinates</button>
+            <button id = "link-parse" type="button" class="btn btn-secondary">Parse to GeoJSON</button>
+            <button id = "link-parse-array" type="button" class="btn btn-light">Extract coordinates</button>
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="styles-link">
                 <label class="form-check-label" for="styles-link">
@@ -86,8 +86,8 @@
       <div id = "file" class = "hidden">
           <input id="kml-file" type="file" class="form-control-file" accept=".kml"> 
           <div class = "cbuttons">
-              <button id = "file-parse" type="button" class="btn btn-secondary">Parse!</button>
-              <button id = "file-parse-array" type="button" class="btn btn-light">I need an array of coordinates</button>
+              <button id = "file-parse" type="button" class="btn btn-secondary">Parse to GeoJSON</button>
+              <button id = "file-parse-array" type="button" class="btn btn-light">Extract coordinates</button>
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="styles-file">
                 <label class="form-check-label" for="styles-file">
@@ -106,6 +106,7 @@
     <div style = "margin-top:10%;margin-bottom:3%;">
       <a id = "read-more" class = "read-more" href="https://github.com/EnzoRobaina/Javascript-KML-Parser" target="_blank">About</a>
     </div>
+    
     <script type="text/javascript" src="../js/spin.js"></script>
   </body>
 </html>

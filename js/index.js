@@ -3,6 +3,7 @@ const parser = new DOMParser();
 var coordArr = []
 var arr = []
 var coords = ''
+
 $(document).ready(function(){
 
     //swal2 custom alerts
