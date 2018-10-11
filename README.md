@@ -1,4 +1,4 @@
-# electron-kml-parser
+# javascript-kml-parser
 A simple desktop/web app to parse KML to geoJSON and/or extract the coordinates in object format: {lat: , lng: }
 
 ## To Use
